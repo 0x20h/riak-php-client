@@ -111,47 +111,6 @@ class TestSuite
         $this->_summary();
     }
 
-    public function testIsAlive()
-    {
-        $client = new Riak(self::HOST, self::PORT);
-        $this->_assert($client->isAlive());
-    }
-
-    public function testStoreAndGet()
-    {
-        $client = new Riak(self::HOST, self::PORT);
-        $bucket = $client->bucket('bucket');
-
-        $rand = rand();
-        $obj = $bucket->newObject('foo', $rand);
-        $obj->store();
-
-        $obj = $bucket->get('foo');
-
-        $this->_assert($obj->exists());
-        $this->_assert($obj->getBucket()->getName() == 'bucket');
-        $this->_assert($obj->getKey() == 'foo');
-        $this->_assert($obj->getData() == $rand);
-    }
-
-    public function testStoreAndGetWithoutKey()
-    {
-        $client = new Riak(self::HOST, self::PORT);
-        $bucket = $client->bucket('bucket');
-
-        $rand = rand();
-        $obj = $bucket->newObject(null, $rand);
-        $obj->store();
-
-        $key = $obj->key;
-
-        $obj = $bucket->get($key);
-        $this->_assert($obj->exists());
-        $this->_assert($obj->getBucket()->getName() == 'bucket');
-        $this->_assert($obj->getKey() == $key);
-        $this->_assert($obj->getData() == $rand);
-    }
-
     public function testBinaryStoreAndGet()
     {
         $client = new Riak(self::HOST, self::PORT);

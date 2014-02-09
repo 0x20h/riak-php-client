@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="Riak PHP Client Test Suite">
+            <directory>tests/integration</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+
+    <php>
+        <env name="RIAK_HOST" value="127.0.0.1"/>
+        <env name="RIAK_PORT" value="8098"/>
+    </php>
+</phpunit>
